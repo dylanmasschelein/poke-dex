@@ -1,11 +1,76 @@
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { IHomePageProps } from '../../../pages';
+import { IPokemon } from '../../../types';
+import { fetchPokemonList } from '../../api_frontend';
 
-interface IProps {}
+import HomeHeader from './HomeHeader';
+import PokemonCards from './PokemonCards';
 
-const Home: FC<IProps> = () => {
+const Home: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
+	const [pokemonList, setPokemonList] = useState<IPokemon[] | undefined>(initialPokemonList);
+	const [selectedPokemonName, setSelectedPokemonName] = useState<string>('');
+	const [searchList, setSearchList] = useState<string[]>([]);
+	const [search, setSearch] = useState<string>('');
+	const [dropdown, setDropdown] = useState<boolean>(false);
+	const [loading, setLoading] = useState(false);
+
+	const router = useRouter();
+
+	const getRandomPokemon = useCallback(async (): Promise<void> => {
+		setLoading(true);
+		const randomList = await fetchPokemonList();
+		setPokemonList(randomList);
+		setLoading(false);
+	}, []);
+
+	const handleSubmit = async (e: any, pokemonName: string): Promise<void> => {
+		e.preventDefault();
+		router.push(`/pokemon/${pokemonName}`);
+	};
+
+	const handleSearch = (value: string): void => {
+		if (!dropdown) setDropdown(true);
+		setSearch(value);
+	};
+
+	const filteredData = (): void => {
+		const filtered: string[] = !search
+			? []
+			: pokemonNameList.filter(pokemon => pokemon.toLowerCase().includes(search.toLocaleLowerCase()));
+		if (filtered.length === 0) setDropdown(false);
+		setSearchList(filtered);
+	};
+
+	const handleOptionClick = useCallback((poke: string): void => {
+		setSelectedPokemonName(poke);
+		setSearch(poke);
+		setDropdown(false);
+	}, []);
+
+	useEffect(() => {
+		filteredData();
+	}, [search]);
+
 	return (
-		<div>
-			<h1>Sup Brah</h1>
+		<div
+			className="flex flex-col items-center h-100s p-0 pb-5"
+			// style={{ background: 'rgb(255, 127, 127)' }}
+			style={{ background: 'linear-gradient(90deg, rgba(0,117,190,1) 0%, rgba(255,204,0,1) 100%)' }}
+		>
+			<HomeHeader
+				handleSubmit={handleSubmit}
+				search={search}
+				handleSearch={handleSearch}
+				selectedPokemonName={selectedPokemonName}
+				dropdown={dropdown}
+				searchList={searchList}
+				handleOptionClick={handleOptionClick}
+				getRandomPokemon={getRandomPokemon}
+				loading={loading}
+			/>
+
+			<PokemonCards pokemonList={pokemonList} />
 		</div>
 	);
 };

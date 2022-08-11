@@ -1,25 +1,25 @@
 import type { GetServerSideProps } from 'next';
 import { FC } from 'react';
 import { fetchInitialPokemon, fetchPokemonList } from '../src/api_frontend';
+import Home from '../src/components/home';
 import { IPokemon } from '../types';
-interface IProps {
-	initialPokemonList: IPokemon[];
-	namesList: string[];
+export interface IHomePageProps {
+	initialPokemonList: IPokemon[] | undefined;
+	pokemonNameList: string[];
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const namesList: string[] = await fetchInitialPokemon();
+	const pokemonNameList: string[] = await fetchInitialPokemon();
 
-	const initialPokemonList: IPokemon[] = await fetchPokemonList();
+	const initialPokemonList: IPokemon[] | undefined = await fetchPokemonList();
 
 	return {
-		props: { initialPokemonList, namesList }
+		props: { initialPokemonList, pokemonNameList }
 	};
 };
 
-const HomePage: FC<IProps> = ({ initialPokemonList, namesList }) => {
-	console.log(initialPokemonList, namesList);
-	return <h1>POKEMAN</h1>;
+const HomePage: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
+	return <Home initialPokemonList={initialPokemonList} pokemonNameList={pokemonNameList} />;
 };
 
 export default HomePage;
