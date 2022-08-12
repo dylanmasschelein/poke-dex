@@ -1,5 +1,5 @@
 # Pokedex!
-View the live version here -> (https://poke-dex-chi.vercel.app/pokedex)
+View the live version here -> (https://poke-dex-chi.vercel.app)
 
 ## Description
 
