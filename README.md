@@ -10,7 +10,7 @@ Keep track of all the pokemon you catch along your journey!
 
 -> Currently, best viewed on mobile  
 
-# Future additions include:  
+## Future additions include:  
   -> Proper error handling  
   -> Many styling improvments  
   -> Testing  
