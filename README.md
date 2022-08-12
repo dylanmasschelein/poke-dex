@@ -1,4 +1,5 @@
 # Pokedex!
+
 View the live version here -> (https://poke-dex-chi.vercel.app)
 
 ## Description
@@ -8,21 +9,23 @@ Keep track of all the pokemon you catch along your journey!
 
 ## Notes
 
--> Currently, best viewed on mobile
+-> Currently, best viewed on mobile  
 
 # Future additions include:
-  -> Proper error handling
-  -> Many styling improvments
-  -> Testing
-  -> Display more information about the pokemon (sound bites!?)
-  -> Improved image quality
-  -> And more!
+
+-> Proper error handling  
+-> Many styling improvments  
+-> Testing  
+-> Display more information about the pokemon (sound bites!?)  
+-> Improved image quality  
+-> And more!  
 
 ## Run project locally
 
 Clone the repo - git@github.com:dylanmasschelein/poke-dex.git
 
 Install dependencies
+
 ```
 npm install
 # or
@@ -30,6 +33,7 @@ yarn install
 ```
 
 Run project locally
+
 ```
 npm run dev
 # or
