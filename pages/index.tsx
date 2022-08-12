@@ -9,7 +9,7 @@ export interface IHomePageProps {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const pokemonNameList: string[] = await fetchInitialPokemon();
+	const pokemonNameList: string[] | undefined = await fetchInitialPokemon();
 
 	const initialPokemonList: IPokemon[] | undefined = await fetchPokemonList();
 

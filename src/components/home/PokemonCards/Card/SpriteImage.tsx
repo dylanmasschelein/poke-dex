@@ -11,7 +11,7 @@ const SpriteImage: FC<IProps> = ({ pokemon }) => (
 		<Image
 			width={100}
 			height={100}
-			src={pokemon.sprites.front_default}
+			src={pokemon.sprites.front_default || ''}
 			alt={`${pokemon.name}`}
 			className="object-scale-down"
 		/>

@@ -1,36 +1,50 @@
-import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { IPokemon } from '../../../../types';
-import { capitalizeFirstLetter } from '../../../../utils/global_functions';
+import { capitalizeFirstLetter, getFromLocalStorage } from '../../../../utils/global_functions';
 import SpriteImage from './SpriteImage';
 import Types from './Types';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CloseIcon from '@mui/icons-material/Close';
-import { ISaveCaughtPkm } from '../../../../types/functions';
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 
 interface IProps {
 	pokemon: IPokemon;
-	removeFromPokedex: (p: IPokemon) => void;
-	addToPokeDex: (p: IPokemon) => void;
 }
 
-const PokemonInfoHeader: FC<IProps> = ({ pokemon, removeFromPokedex, addToPokeDex }) => {
-	// HACK, needs work
-	const data: any = localStorage.getItem('caughtPokemon');
-	const parsed: any = JSON.parse(data);
-	const pokemonInPokedex = parsed ? parsed.find((p: IPokemon) => p.name === pokemon.name) : undefined;
-	const [trigger, setTrigger] = useState(false);
+const PokemonInfoHeader: FC<IProps> = ({ pokemon }) => {
+	const [pokedex, setPokedex] = useState<IPokemon[] | undefined>(undefined);
+	const pokemonInPokedex = pokedex ? pokedex.find((p: IPokemon) => p.name === pokemon.name) : undefined;
 
-	const handleTrigger = () => setTrigger(prev => !prev);
-	const pokedexAction = () => {
+	const addToPokeDex = (pokemon: IPokemon): void => {
+		const pokedex: IPokemon[] | undefined = getFromLocalStorage();
+		let newPokedex;
+
+		if (pokedex) {
+			const updatedPokedex = [...pokedex, pokemon];
+
+			localStorage.setItem('pokedex', JSON.stringify(updatedPokedex));
+			newPokedex = getFromLocalStorage();
+		} else {
+			localStorage.setItem('pokedex', JSON.stringify([pokemon]));
+			newPokedex = getFromLocalStorage();
+		}
+
+		setPokedex(newPokedex);
+	};
+
+	const removeFromPokedex = (pokemon: IPokemon): void => {
+		const filteredPokedex = pokedex ? pokedex.filter((p: IPokemon) => p.name !== pokemon.name) : undefined;
+		localStorage.setItem('pokedex', JSON.stringify(filteredPokedex));
+
+		setPokedex(filteredPokedex);
+	};
+
+	const pokedexAction = (): void => {
 		if (pokemonInPokedex) {
 			removeFromPokedex(pokemon);
 		} else {
 			addToPokeDex(pokemon);
 		}
-		handleTrigger();
 	};
 
-	useEffect(() => {}, [trigger]);
 	return (
 		<div>
 			<div className="flex justify-between items-baseline">
@@ -40,13 +54,13 @@ const PokemonInfoHeader: FC<IProps> = ({ pokemon, removeFromPokedex, addToPokeDe
 				<span className="font-bold text-dark-blue">#{pokemon.id}</span>
 			</div>
 			<Types pokemon={pokemon} />
-			<p
-				className="flex z-20 items-center transition-all absolute bottom-[5px] cursor-pointer bg-blue rounded-5xl py-1 px-2 hover:scale-110"
+			<div
+				className="bg-white w-32 transition-all absolute bottom-[10px] cursor-pointer rounded-full z-20 hover:scale-110 p-1"
 				onClick={pokedexAction}
 			>
-				{pokemonInPokedex ? 'Caught' : 'Uncaught'}
-				{pokemonInPokedex ? <CheckCircleIcon sx={{ color: 'green' }} /> : <CloseIcon sx={{ color: 'red' }} />}
-			</p>
+				<CatchingPokemonIcon sx={{ fontSize: '60px', color: `${pokemonInPokedex ? 'green' : 'red'}` }} />
+				<span>{pokemonInPokedex ? 'Caught' : 'Catch'}</span>
+			</div>
 			<SpriteImage pokemon={pokemon} />
 		</div>
 	);

@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { IPokemon, IStat } from '../../../../../types';
-import { capitalizeFirstLetter } from '../../../../../utils/global_functions';
-import StatsBar from '../../../common/StatsBar';
+import { IPokemon, IStat } from '../../../../types';
+import { capitalizeFirstLetter } from '../../../../utils/global_functions';
+import StatsBar from '../../common/StatsBar';
 
 interface IProps {
 	pokemon: IPokemon;

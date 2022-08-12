@@ -15,9 +15,12 @@ const Card: FC<IProps> = ({ pokemon }) => (
 			className="w-45 max-w-xs h-36 p-1 m-1 rounded-xl flex flex-col relative shadow cursor-pointer hover:scale-105 transition-all"
 			style={{ backgroundColor: `${getRGBAValue(pokemon.color)}` }}
 		>
-			<h3 className="md:text-2xl mx-2 font-black text-white tracking-wider">
-				{capitalizeFirstLetter(pokemon.name)}
-			</h3>
+			<div className="flex justify-between items-baseline">
+				<h3 className="md:text-2xl mx-2 font-black text-white tracking-wider">
+					{capitalizeFirstLetter(pokemon.name)}
+				</h3>
+				<span className="font-bold text-white pr-1">#{pokemon.id}</span>
+			</div>
 
 			<Types pokemon={pokemon} />
 			<SpriteImage pokemon={pokemon} />

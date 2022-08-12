@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, FormEvent, useCallback, useEffect, useState } from 'react';
 import { IHomePageProps } from '../../../pages';
 import { IPokemon } from '../../../types';
 import { fetchPokemonList } from '../../api_frontend';
@@ -13,7 +13,7 @@ const Home: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
 	const [searchList, setSearchList] = useState<string[]>([]);
 	const [search, setSearch] = useState<string>('');
 	const [dropdown, setDropdown] = useState<boolean>(false);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const router = useRouter();
 
@@ -24,7 +24,7 @@ const Home: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
 		setLoading(false);
 	}, []);
 
-	const handleSubmit = async (e: any, pokemonName: string): Promise<void> => {
+	const handleSubmit = async (e: FormEvent, pokemonName: string): Promise<void> => {
 		e.preventDefault();
 		router.push(`/pokemon/${pokemonName}`);
 	};
@@ -55,7 +55,6 @@ const Home: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
 	return (
 		<div
 			className="flex flex-col items-center h-100s p-0 pb-5"
-			// style={{ background: 'rgb(255, 127, 127)' }}
 			style={{ background: 'linear-gradient(90deg, rgba(0,117,190,1) 0%, rgba(255,204,0,1) 100%)' }}
 		>
 			<HomeHeader

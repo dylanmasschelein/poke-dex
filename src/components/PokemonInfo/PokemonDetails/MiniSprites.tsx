@@ -14,7 +14,7 @@ const MiniSprites: FC<IProps> = ({ pokemon }) => (
 			{Object.values(pokemon.sprites).map((value: string, idx: number) => {
 				if (value && typeof value !== 'object') {
 					return (
-						<div className="rounded-full">
+						<div key={value} className="rounded-full">
 							<Image width={100} height={100} key={`${value}-${idx}`} src={value} alt={pokemon.name} />
 						</div>
 					);

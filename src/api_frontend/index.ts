@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { IPokemonRes } from '../../types';
+import { IPokemon, IPokemonRes } from '../../types';
 import { trimObjects } from '../../utils/global_functions';
 import { trimPokemonFields } from '../../utils/global_vars';
 
-export const fetchPokemon = async (pokemonName: string) => {
+type TPokeOrUndefined = IPokemon[] | undefined;
+
+export const fetchPokemon = async (pokemonName: string): Promise<TPokeOrUndefined> => {
 	try {
 		const { data: poke } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
 		const { data: species } = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`);
@@ -17,7 +19,7 @@ export const fetchPokemon = async (pokemonName: string) => {
 	}
 };
 
-export const fetchPokemonList = async () => {
+export const fetchPokemonList = async (): Promise<TPokeOrUndefined> => {
 	const randomOffset = Math.floor(Math.random() * 800) - 10;
 	try {
 		const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${randomOffset}&limit=10`);
@@ -40,7 +42,7 @@ export const fetchPokemonList = async () => {
 	}
 };
 
-export const fetchInitialPokemon = async () => {
+export const fetchInitialPokemon = async (): Promise<string[] | undefined> => {
 	try {
 		const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=1154`);
 		const filteredNameList = data.results.map((pokemon: IPokemonRes) => pokemon.name);

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { IHandleFormSubmit, IString_Void_Func } from '../../../../types/functions';
 import NavBar from '../../common/NavBar';
@@ -18,23 +17,20 @@ interface IProps {
 	loading: boolean;
 }
 
-const HomeHeader: FC<IProps> = props => {
-	const router = useRouter();
-	return (
-		<section className="flex flex-col w-11/12 md:w-full " style={{ maxWidth: '640px' }}>
-			<NavBar hide />
-			<div className="flex justify-between items-center">
-				<h1 className="text-mat-black  text-3xl font-bold">Poke-dex</h1>
-				{props.loading ? (
-					<CircularProgress size={25} />
-				) : (
-					<ShuffleIcon className="cursor-pointer" onClick={props.getRandomPokemon} />
-				)}
-			</div>
+const HomeHeader: FC<IProps> = props => (
+	<section className="flex flex-col w-11/12 md:w-full " style={{ maxWidth: '640px' }}>
+		<NavBar hideLeft />
+		<div className="flex justify-between items-center">
+			<h1 className="text-mat-black  text-3xl font-bold">Poke-dex</h1>
+			{props.loading ? (
+				<CircularProgress size={25} />
+			) : (
+				<ShuffleIcon className="cursor-pointer" onClick={props.getRandomPokemon} />
+			)}
+		</div>
 
-			<SearchForm {...props} />
-		</section>
-	);
-};
+		<SearchForm {...props} />
+	</section>
+);
 
 export default HomeHeader;

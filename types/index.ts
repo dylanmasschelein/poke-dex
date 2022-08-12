@@ -1,5 +1,3 @@
-// Some types are other to save time
-
 export type IPokemonRes = { name: string; url: string };
 export type IType = { name: string; url: string };
 export type INestedType = { type: IType };

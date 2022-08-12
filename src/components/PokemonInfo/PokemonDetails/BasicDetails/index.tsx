@@ -1,10 +1,8 @@
 import { FC } from 'react';
-
 import { IPokemon } from '../../../../../types';
 import { capitalizeFirstLetter } from '../../../../../utils/global_functions';
 import StatsBar from '../../../common/StatsBar';
 import Ability from './Ability';
-
 interface IProps {
 	pokemon: IPokemon;
 }
@@ -28,13 +26,13 @@ const BasicDetails: FC<IProps> = ({ pokemon }) => (
 		{/* Height */}
 		<div className="flex w-full">
 			<h3 className="w-32 mr-auto text-sm text-gray">Height:</h3>
-			<span>{pokemon.height}</span>
+			<span>{pokemon.height} in</span>
 		</div>
 
 		{/* Weight */}
 		<div className="flex w-full">
 			<h3 className="w-32 mr-auto text-sm text-gray">Weight:</h3>
-			<span>{pokemon.weight}</span>
+			<span>{pokemon.weight} lbs</span>
 		</div>
 
 		<Ability pokemon={pokemon} />
