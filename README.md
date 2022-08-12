@@ -6,15 +6,15 @@ Find all the information you need about any pokemon out in the wild to give you 
 Keep track of all the pokemon you catch along your journey!
 
 Notes
--> Currently, best viewed on mobile
+-> Currently, best viewed on mobile  
 
-Future additions include:
--> Proper error handling
--> Many styling improvments
--> Testing
--> Display more information about the pokemon (sound bites!?)
--> Improved image quality
--> And more!
+Future additions include:  
+-> Proper error handling  
+-> Many styling improvments  
+-> Testing  
+-> Display more information about the pokemon (sound bites!?)  
+-> Improved image quality  
+-> And more!  
 
 Run project locally
 Clone the repo - git@github.com:dylanmasschelein/poke-dex.git
