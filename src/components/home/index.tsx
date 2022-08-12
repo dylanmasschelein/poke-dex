@@ -55,7 +55,10 @@ const Home: FC<IHomePageProps> = ({ initialPokemonList, pokemonNameList }) => {
 	return (
 		<div
 			className="flex flex-col items-center h-m-screen p-0 pb-5"
-			style={{ background: 'linear-gradient(90deg, rgba(0,117,190,1) 0%, rgba(255,204,0,1) 100%)' }}
+			style={{
+				background: 'linear-gradient(90deg, rgba(0,117,190,1) 0%, rgba(255,204,0,1) 100%)',
+				minHeight: '100vh'
+			}}
 		>
 			<HomeHeader
 				handleSubmit={handleSubmit}

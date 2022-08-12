@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { IPokemon } from '../../../../types';
 import { capitalizeFirstLetter, getFromLocalStorage } from '../../../../utils/global_functions';
 import SpriteImage from './SpriteImage';
@@ -11,7 +11,7 @@ interface IProps {
 
 const PokemonInfoHeader: FC<IProps> = ({ pokemon }) => {
 	const [pokedex, setPokedex] = useState<IPokemon[] | undefined>(undefined);
-	const pokemonInPokedex = pokedex ? pokedex.find((p: IPokemon) => p.name === pokemon.name) : undefined;
+	const [pokemonInPokedex, setPokemonInPokedex] = useState<IPokemon | undefined>(undefined);
 
 	const addToPokeDex = (pokemon: IPokemon): void => {
 		const pokedex: IPokemon[] | undefined = getFromLocalStorage();
@@ -44,6 +44,18 @@ const PokemonInfoHeader: FC<IProps> = ({ pokemon }) => {
 			addToPokeDex(pokemon);
 		}
 	};
+
+	useEffect(() => {
+		const storage = getFromLocalStorage();
+		setPokedex(storage);
+	}, []);
+
+	useEffect(() => {
+		if (pokedex) {
+			const foundPokemon = pokedex ? pokedex.find((p: IPokemon) => p.name === pokemon.name) : undefined;
+			setPokemonInPokedex(foundPokemon);
+		}
+	}, [pokedex, pokemon.name]);
 
 	return (
 		<div>
