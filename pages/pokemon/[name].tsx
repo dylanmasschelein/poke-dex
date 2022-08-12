@@ -2,7 +2,7 @@ import type { GetServerSideProps } from 'next';
 import React, { FC } from 'react';
 import { fetchPokemon } from '../../src/api_frontend';
 import { IPokemon } from '../../types';
-import PokemonInfo from '../../src/components/pokemonInfo';
+import PokemonInfo from '../../src/components/PokemonInfo';
 
 interface IProps {
 	pokemon: IPokemon;

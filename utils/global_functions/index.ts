@@ -41,6 +41,6 @@ export const getRGBAValue = (color: string): string => {
 
 export const getFromLocalStorage = (): IPokemon[] | undefined => {
 	const storage: string | null = localStorage.getItem('pokedex');
-	const pokedex: IPokemon[] | undefined = JSON.parse(storage || '');
+	const pokedex: IPokemon[] | undefined = storage ? JSON.parse(storage) : undefined;
 	return pokedex;
 };

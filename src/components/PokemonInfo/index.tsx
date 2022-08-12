@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from 'react';
+import { FC } from 'react';
 import { IPokemon } from '../../../types';
 import { getRGBAValue } from '../../../utils/global_functions';
 import NavBar from '../common/NavBar';
