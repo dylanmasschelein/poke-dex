@@ -22,7 +22,7 @@ const HomeHeader: FC<IProps> = props => {
 	const router = useRouter();
 	return (
 		<section className="flex flex-col w-11/12 md:w-full " style={{ maxWidth: '640px' }}>
-			<NavBar backFunc={null} pokemonFunc={() => router.push('/pokedex')} />
+			<NavBar hide />
 			<div className="flex justify-between items-center">
 				<h1 className="text-mat-black  text-3xl font-bold">Poke-dex</h1>
 				{props.loading ? (

@@ -1,23 +1,23 @@
 import { FC } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
+import Link from 'next/link';
 
 interface IProps {
-	backFunc?: any;
-	pokemonFunc: any;
+	hide?: boolean;
 }
 
-const NavBar: FC<IProps> = ({ backFunc, pokemonFunc }) => (
+const NavBar: FC<IProps> = ({ hide }) => (
 	<div className="py-3 flex justify-between ">
-		<ArrowBackIcon
-			className={`${!backFunc ? 'hidden' : undefined}`}
-			onClick={backFunc}
-			style={{ visibility: !backFunc ? 'hidden' : undefined }}
-		/>
-		<div className="flex items-center text-sm cursor-pointer" onClick={pokemonFunc}>
-			<CatchingPokemonIcon className="" />
-			<p>Pokedex</p>
-		</div>
+		<Link href="/">
+			<ArrowBackIcon className="cursor-pointer" style={{ visibility: hide ? 'hidden' : undefined }} />
+		</Link>
+		<Link href="/pokedex">
+			<div className="flex items-center text-sm cursor-pointer">
+				<CatchingPokemonIcon className="" />
+				<p>Pokedex</p>
+			</div>
+		</Link>
 	</div>
 );
 
