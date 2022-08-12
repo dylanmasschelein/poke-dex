@@ -1,14 +1,14 @@
-Pokedex!
+## Pokedex!
 View the live version here -> (https://poke-dex-chi.vercel.app)
 
-Description
+## Description
 Find all the information you need about any pokemon out in the wild to give you the best chance to succeed as a pokemon master!
 Keep track of all the pokemon you catch along your journey!
 
-Notes
+## Notes
 -> Currently, best viewed on mobile  
 
-Future additions include:  
+## Future additions include:  
 -> Proper error handling  
 -> Many styling improvments  
 -> Testing  
@@ -16,7 +16,7 @@ Future additions include:
 -> Improved image quality  
 -> And more!  
 
-Run project locally
+## Run project locally
 Clone the repo - git@github.com:dylanmasschelein/poke-dex.git
 
 Install dependencies
@@ -36,4 +36,4 @@ yarn dev
 
 Open project in localhost:3000
 
-Thank you and enjoy!
+### Thank you and enjoy!
