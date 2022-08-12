@@ -21,14 +21,19 @@ Clone the repo - git@github.com:dylanmasschelein/poke-dex.git
 
 Install dependencies
 
+```
 npm install
 # or
 yarn install
-Run project locally
+```
 
+Run project locally
+```
 npm run dev
 # or
 yarn dev
+```
+
 Open project in localhost:3000
 
 Thank you and enjoy!
